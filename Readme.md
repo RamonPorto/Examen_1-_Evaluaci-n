@@ -90,8 +90,8 @@ En este caso se mapea el puerto 53 tanto del contenedor como del host.
 ## 7.¿Para que sirve el registro CNAME? Pon un ejemplo
 Indica que un dominio es un alias de otro dominio.
 
-mi-sitio.com    IN  A   33.33.33.33
-www     CNAME   mi-sitio.com
+    mi-sitio.com    IN  A   33.33.33.33
+    www     CNAME   mi-sitio.com
 
 En este ejemplo al consultar www.mi-sitio.com devolvería mi-sitio.com
 
