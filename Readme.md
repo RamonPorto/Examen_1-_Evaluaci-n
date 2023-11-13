@@ -55,7 +55,7 @@ Mediante el comando docker inspect podemos obtener las IPs de los contenedores. 
 docker inspect bin9_subnet
 ~~~
 
-Inspeccionamos la red a la que pertenecen los contenedores, *bind9_subnet* en este caso y obtenemos la siguiente salida por consola.
+Inspeccionamos la red a la que pertenecen los contenedores, *bind9_subnet* en este caso y obtenemos la siguiente salida por consola (solo la parte de los contenedores, el comando muestra mas información).
 
 Salida por consola del comando:
 ```
