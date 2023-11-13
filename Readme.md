@@ -128,7 +128,7 @@ Por último comprobamos el registro *TXT*
 
 Para finalizar vemos los logs haciendo clic derecho sobre el contenedor y seleccionando la opción "*View Logs*"
 
-![ALT](/home/asir2/Documentos/SRI/Git/Examen/6.png)
+![ALT](6.png)
 
 Salida por consola de los logs:
 ```
