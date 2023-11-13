@@ -129,6 +129,8 @@ Por último comprobamos el registro *TXT*
 Para finalizar vemos los logs haciendo clic derecho sobre el contenedor y seleccionando la opción "*View Logs*"
 
 ![ALT](6.png)
+![ALT](13.png)
+
 
 Salida por consola de los logs:
 ```
@@ -404,3 +406,404 @@ exec /usr/sbin/named -u "bind" "-g" ""
 ```
 
 ## 10.Realiza el apartado 9 en la máquina virtual con DNS
+
+Aprovechando que el bind9 ya estaba instalado y correctamente configurado de la práctica anterior solo, debemos añadir el nuevo fichero *db.tiendadeelectronica.int* en el directorio ***/var/lib/bind***, como se muestra en la siguientes imágenes.  
+
+![ALT](8.png)
+![ALT](7.png)
+
+*Los ficheros de configuración son iguales para ambos apartados prácticos
+
+Debemos reiniciar la máquina virtual para que se actualice la configuración.
+
+Ahora consultaremos mediante el comando dig
+
+Comprobación de *www.tiendadeelectronica.int*
+![ALT](9.png)
+
+Comprobación del registro *CNAME*
+![ALT](10.png)
+
+Comprobación del registro *TXT*
+![ALT](11.png)
+
+Por último, para ver los logs, haremos un cat del fichero *auth.log* que se encuentra ubicado en el directorio */var/log* para ver los logs. El comando es el siguiente:
+
+~~~
+cat /var/log/auth.log
+~~~
+
+![ALT](12.png)
+
+Salida por consola del comando
+```
+console
+Nov 13 15:24:49 usuario-VirtualBox gdm-autologin]: gkr-pam: no password is available for user
+Nov 13 15:24:49 usuario-VirtualBox gdm-autologin]: pam_unix(gdm-autologin:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:24:49 usuario-VirtualBox systemd-logind[619]: New session 1 of user usuario.
+Nov 13 15:24:49 usuario-VirtualBox systemd: pam_unix(systemd-user:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:24:50 usuario-VirtualBox gdm-autologin]: gkr-pam: gnome-keyring-daemon started properly
+Nov 13 15:24:50 usuario-VirtualBox gnome-keyring-daemon[1162]: The PKCS#11 component was already initialized
+Nov 13 15:24:50 usuario-VirtualBox gnome-keyring-daemon[1162]: The Secret Service was already initialized
+Nov 13 15:24:50 usuario-VirtualBox gnome-keyring-daemon[1162]: The SSH agent was already initialized
+Nov 13 15:24:51 usuario-VirtualBox polkitd(authority=local): Registered Authentication Agent for unix-session:1 (system bus name :1.44 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale es_ES.UTF-8)
+Nov 13 15:24:54 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 15:24:54 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 15:25:01 usuario-VirtualBox CRON[2425]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:25:01 usuario-VirtualBox CRON[2425]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:25:12 usuario-VirtualBox sudo:  usuario : TTY=pts/0 ; PWD=/home/usuario ; USER=root ; COMMAND=/usr/bin/systemctl status bind9
+Nov 13 15:25:12 usuario-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 15:25:15 usuario-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+Nov 13 15:25:15 usuario-VirtualBox dbus-daemon[581]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Nov 13 15:25:27 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 15:25:27 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 15:25:28 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 15:25:28 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 15:25:54 usuario-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 15:25:54 usuario-VirtualBox pkexec[3237]: usuario: Executing command [USER=root] [TTY=unknown] [CWD=/home/usuario] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Nov 13 15:26:01 usuario-VirtualBox CRON[3316]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:26:01 usuario-VirtualBox CRON[3316]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:27:01 usuario-VirtualBox CRON[3360]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:27:01 usuario-VirtualBox CRON[3360]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:28:01 usuario-VirtualBox CRON[3372]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:28:01 usuario-VirtualBox CRON[3372]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:29:01 usuario-VirtualBox CRON[3384]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:29:01 usuario-VirtualBox CRON[3384]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:30:01 usuario-VirtualBox CRON[3439]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 13 15:30:01 usuario-VirtualBox CRON[3440]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:30:01 usuario-VirtualBox CRON[3440]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:30:01 usuario-VirtualBox CRON[3439]: pam_unix(cron:session): session closed for user root
+Nov 13 15:31:01 usuario-VirtualBox CRON[3457]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:31:01 usuario-VirtualBox CRON[3457]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:32:01 usuario-VirtualBox CRON[3481]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:32:01 usuario-VirtualBox CRON[3481]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:33:01 usuario-VirtualBox CRON[3494]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:33:01 usuario-VirtualBox CRON[3494]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:34:01 usuario-VirtualBox CRON[3508]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:34:01 usuario-VirtualBox CRON[3508]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:35:01 usuario-VirtualBox CRON[3531]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:35:01 usuario-VirtualBox CRON[3531]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:36:01 usuario-VirtualBox CRON[3728]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:36:01 usuario-VirtualBox CRON[3728]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:37:01 usuario-VirtualBox CRON[3740]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:37:01 usuario-VirtualBox CRON[3740]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:38:01 usuario-VirtualBox CRON[3752]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:38:01 usuario-VirtualBox CRON[3752]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:39:01 usuario-VirtualBox CRON[3764]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:39:01 usuario-VirtualBox CRON[3764]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:40:01 usuario-VirtualBox CRON[3779]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:40:01 usuario-VirtualBox CRON[3779]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:41:01 usuario-VirtualBox CRON[3791]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:41:01 usuario-VirtualBox CRON[3791]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:42:01 usuario-VirtualBox CRON[3802]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:42:01 usuario-VirtualBox CRON[3802]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:43:01 usuario-VirtualBox CRON[3816]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:43:01 usuario-VirtualBox CRON[3816]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:44:01 usuario-VirtualBox CRON[3830]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:44:01 usuario-VirtualBox CRON[3830]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:45:01 usuario-VirtualBox CRON[3843]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:45:01 usuario-VirtualBox CRON[3843]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:46:01 usuario-VirtualBox CRON[3857]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:46:01 usuario-VirtualBox CRON[3857]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:47:01 usuario-VirtualBox CRON[3868]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:47:01 usuario-VirtualBox CRON[3868]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:48:01 usuario-VirtualBox CRON[3880]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:48:01 usuario-VirtualBox CRON[3880]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:49:01 usuario-VirtualBox CRON[3894]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:49:01 usuario-VirtualBox CRON[3894]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:50:01 usuario-VirtualBox CRON[3906]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:50:01 usuario-VirtualBox CRON[3906]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:51:01 usuario-VirtualBox CRON[3920]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:51:01 usuario-VirtualBox CRON[3920]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:52:01 usuario-VirtualBox CRON[3932]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:52:01 usuario-VirtualBox CRON[3932]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:53:01 usuario-VirtualBox CRON[3944]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:53:01 usuario-VirtualBox CRON[3944]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:54:01 usuario-VirtualBox CRON[3957]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:54:01 usuario-VirtualBox CRON[3957]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:55:01 usuario-VirtualBox CRON[3972]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:55:01 usuario-VirtualBox CRON[3972]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:56:01 usuario-VirtualBox CRON[3994]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:56:01 usuario-VirtualBox CRON[3994]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:57:01 usuario-VirtualBox CRON[4006]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:57:01 usuario-VirtualBox CRON[4006]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:58:01 usuario-VirtualBox CRON[4017]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:58:01 usuario-VirtualBox CRON[4017]: pam_unix(cron:session): session closed for user usuario
+Nov 13 15:59:01 usuario-VirtualBox CRON[4030]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 15:59:01 usuario-VirtualBox CRON[4030]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:00:01 usuario-VirtualBox CRON[4042]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:00:01 usuario-VirtualBox CRON[4042]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:01:01 usuario-VirtualBox CRON[4055]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:01:01 usuario-VirtualBox CRON[4055]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:02:01 usuario-VirtualBox CRON[4068]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:02:01 usuario-VirtualBox CRON[4068]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:03:01 usuario-VirtualBox CRON[4293]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:03:01 usuario-VirtualBox CRON[4293]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:04:01 usuario-VirtualBox CRON[4306]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:04:01 usuario-VirtualBox CRON[4306]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:04:53 usuario-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 16:04:53 usuario-VirtualBox pkexec[4348]: usuario: Executing command [USER=root] [TTY=unknown] [CWD=/home/usuario] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Nov 13 16:05:01 usuario-VirtualBox CRON[4357]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:05:01 usuario-VirtualBox CRON[4357]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:06:02 usuario-VirtualBox CRON[4369]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:06:02 usuario-VirtualBox CRON[4369]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:07:01 usuario-VirtualBox CRON[4383]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:07:01 usuario-VirtualBox CRON[4383]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:08:01 usuario-VirtualBox CRON[4395]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:08:01 usuario-VirtualBox CRON[4395]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:09:01 usuario-VirtualBox CRON[4408]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:09:01 usuario-VirtualBox CRON[4408]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:10:01 usuario-VirtualBox CRON[4420]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:10:01 usuario-VirtualBox CRON[4420]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:11:01 usuario-VirtualBox CRON[4434]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:11:01 usuario-VirtualBox CRON[4434]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:12:01 usuario-VirtualBox CRON[4447]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:12:01 usuario-VirtualBox CRON[4447]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:13:01 usuario-VirtualBox CRON[4459]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:13:01 usuario-VirtualBox CRON[4459]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:14:01 usuario-VirtualBox CRON[4471]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:14:01 usuario-VirtualBox CRON[4471]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:15:01 usuario-VirtualBox CRON[4484]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:15:01 usuario-VirtualBox CRON[4484]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:16:01 usuario-VirtualBox CRON[4498]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:16:01 usuario-VirtualBox CRON[4498]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:17:01 usuario-VirtualBox CRON[4510]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 13 16:17:01 usuario-VirtualBox CRON[4511]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:17:01 usuario-VirtualBox CRON[4511]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:17:01 usuario-VirtualBox CRON[4510]: pam_unix(cron:session): session closed for user root
+Nov 13 16:18:01 usuario-VirtualBox CRON[4525]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:18:01 usuario-VirtualBox CRON[4525]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:19:01 usuario-VirtualBox CRON[4538]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:19:01 usuario-VirtualBox CRON[4538]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:20:01 usuario-VirtualBox CRON[4550]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:20:01 usuario-VirtualBox CRON[4550]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:21:01 usuario-VirtualBox CRON[4562]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:21:01 usuario-VirtualBox CRON[4562]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:22:01 usuario-VirtualBox CRON[4576]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:22:01 usuario-VirtualBox CRON[4576]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:23:01 usuario-VirtualBox CRON[4588]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:23:01 usuario-VirtualBox CRON[4588]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:24:01 usuario-VirtualBox CRON[4602]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:24:01 usuario-VirtualBox CRON[4602]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:25:01 usuario-VirtualBox CRON[4626]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:25:01 usuario-VirtualBox CRON[4626]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:26:01 usuario-VirtualBox CRON[4640]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:26:01 usuario-VirtualBox CRON[4640]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:27:01 usuario-VirtualBox CRON[4652]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:27:01 usuario-VirtualBox CRON[4652]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:28:01 usuario-VirtualBox CRON[4664]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:28:01 usuario-VirtualBox CRON[4664]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:29:01 usuario-VirtualBox CRON[4677]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:29:01 usuario-VirtualBox CRON[4677]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:30:01 usuario-VirtualBox CRON[4689]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 13 16:30:01 usuario-VirtualBox CRON[4690]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:30:01 usuario-VirtualBox CRON[4690]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:30:01 usuario-VirtualBox CRON[4689]: pam_unix(cron:session): session closed for user root
+Nov 13 16:31:01 usuario-VirtualBox CRON[4702]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:31:01 usuario-VirtualBox CRON[4702]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:32:01 usuario-VirtualBox CRON[4716]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:32:01 usuario-VirtualBox CRON[4716]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:33:01 usuario-VirtualBox CRON[4729]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:33:01 usuario-VirtualBox CRON[4729]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:34:01 usuario-VirtualBox CRON[4742]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:34:01 usuario-VirtualBox CRON[4742]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:35:01 usuario-VirtualBox CRON[4757]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:35:01 usuario-VirtualBox CRON[4757]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:36:01 usuario-VirtualBox CRON[4777]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:36:01 usuario-VirtualBox CRON[4777]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:37:01 usuario-VirtualBox CRON[4789]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:37:01 usuario-VirtualBox CRON[4789]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:38:01 usuario-VirtualBox CRON[4800]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:38:01 usuario-VirtualBox CRON[4800]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:39:01 usuario-VirtualBox CRON[4813]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:39:01 usuario-VirtualBox CRON[4813]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:40:01 usuario-VirtualBox CRON[4825]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:40:01 usuario-VirtualBox CRON[4825]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:41:01 usuario-VirtualBox CRON[4837]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:41:01 usuario-VirtualBox CRON[4837]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:42:01 usuario-VirtualBox CRON[4850]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:42:01 usuario-VirtualBox CRON[4850]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:43:01 usuario-VirtualBox CRON[4861]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:43:01 usuario-VirtualBox CRON[4861]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:44:01 usuario-VirtualBox CRON[4873]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:44:01 usuario-VirtualBox CRON[4873]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:45:01 usuario-VirtualBox CRON[4886]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:45:01 usuario-VirtualBox CRON[4886]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:46:01 usuario-VirtualBox CRON[4897]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:46:01 usuario-VirtualBox CRON[4897]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:47:01 usuario-VirtualBox CRON[4911]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:47:01 usuario-VirtualBox CRON[4911]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:48:01 usuario-VirtualBox CRON[4923]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:48:01 usuario-VirtualBox CRON[4923]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:49:01 usuario-VirtualBox CRON[4936]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:49:01 usuario-VirtualBox CRON[4936]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:50:01 usuario-VirtualBox CRON[4949]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:50:01 usuario-VirtualBox CRON[4949]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:51:02 usuario-VirtualBox CRON[4962]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:51:02 usuario-VirtualBox CRON[4962]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:52:01 usuario-VirtualBox CRON[4974]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:52:01 usuario-VirtualBox CRON[4974]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:53:01 usuario-VirtualBox CRON[4985]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:53:01 usuario-VirtualBox CRON[4985]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:54:01 usuario-VirtualBox CRON[4999]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:54:01 usuario-VirtualBox CRON[4999]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:55:01 usuario-VirtualBox CRON[5012]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:55:01 usuario-VirtualBox CRON[5012]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:56:01 usuario-VirtualBox CRON[5023]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:56:01 usuario-VirtualBox CRON[5023]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:57:01 usuario-VirtualBox CRON[5036]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:57:01 usuario-VirtualBox CRON[5036]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:58:01 usuario-VirtualBox CRON[5048]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:58:01 usuario-VirtualBox CRON[5048]: pam_unix(cron:session): session closed for user usuario
+Nov 13 16:59:01 usuario-VirtualBox CRON[5061]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 16:59:01 usuario-VirtualBox CRON[5061]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:00:01 usuario-VirtualBox CRON[5073]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:00:01 usuario-VirtualBox CRON[5073]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:01:01 usuario-VirtualBox CRON[5085]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:01:01 usuario-VirtualBox CRON[5085]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:02:01 usuario-VirtualBox CRON[5098]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:02:01 usuario-VirtualBox CRON[5098]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:03:01 usuario-VirtualBox CRON[5111]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:03:01 usuario-VirtualBox CRON[5111]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:04:01 usuario-VirtualBox CRON[5124]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:04:01 usuario-VirtualBox CRON[5124]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:05:01 usuario-VirtualBox CRON[5137]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:05:01 usuario-VirtualBox CRON[5137]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:06:01 usuario-VirtualBox CRON[5149]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:06:01 usuario-VirtualBox CRON[5149]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:06:25 usuario-VirtualBox gdm-password]: gkr-pam: unlocked login keyring
+Nov 13 17:06:51 usuario-VirtualBox sudo: pam_unix(sudo:auth): authentication failure; logname= uid=1000 euid=0 tty=/dev/pts/0 ruser=usuario rhost=  user=usuario
+Nov 13 17:07:01 usuario-VirtualBox CRON[5250]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:07:01 usuario-VirtualBox CRON[5250]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:07:04 usuario-VirtualBox sudo:  usuario : TTY=pts/0 ; PWD=/home/usuario ; USER=root ; COMMAND=/usr/bin/systemctl status bind9
+Nov 13 17:07:04 usuario-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:07:07 usuario-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+Nov 13 17:07:23 usuario-VirtualBox su: (to root) usuario on pts/0
+Nov 13 17:07:23 usuario-VirtualBox su: pam_unix(su-l:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:08:01 usuario-VirtualBox CRON[5316]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:08:01 usuario-VirtualBox CRON[5316]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:09:01 usuario-VirtualBox CRON[5413]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:09:01 usuario-VirtualBox CRON[5413]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:10:01 usuario-VirtualBox CRON[5505]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:10:01 usuario-VirtualBox CRON[5505]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:11:01 usuario-VirtualBox CRON[5558]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:11:01 usuario-VirtualBox CRON[5558]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:12:01 usuario-VirtualBox CRON[5618]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:12:01 usuario-VirtualBox CRON[5618]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:13:01 usuario-VirtualBox CRON[5633]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:13:01 usuario-VirtualBox CRON[5633]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:14:01 usuario-VirtualBox CRON[5645]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:14:01 usuario-VirtualBox CRON[5645]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:15:01 usuario-VirtualBox CRON[5663]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:15:01 usuario-VirtualBox CRON[5663]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:15:17 usuario-VirtualBox su: pam_unix(su-l:session): session closed for user root
+Nov 13 17:16:01 usuario-VirtualBox CRON[5708]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:16:01 usuario-VirtualBox CRON[5708]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:17:01 usuario-VirtualBox CRON[5804]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 13 17:17:01 usuario-VirtualBox CRON[5805]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:17:01 usuario-VirtualBox CRON[5805]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:17:01 usuario-VirtualBox CRON[5804]: pam_unix(cron:session): session closed for user root
+Nov 13 17:18:01 usuario-VirtualBox CRON[5902]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:18:01 usuario-VirtualBox CRON[5902]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:18:22 usuario-VirtualBox sudo:  usuario : TTY=pts/0 ; PWD=/home/usuario ; USER=root ; COMMAND=/usr/sbin/reboot
+Nov 13 17:18:22 usuario-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:18:22 usuario-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+Nov 13 17:18:28 usuario-VirtualBox systemd-logind[626]: New seat seat0.
+Nov 13 17:18:28 usuario-VirtualBox systemd-logind[626]: Watching system buttons on /dev/input/event0 (Power Button)
+Nov 13 17:18:28 usuario-VirtualBox systemd-logind[626]: Watching system buttons on /dev/input/event1 (Sleep Button)
+Nov 13 17:18:28 usuario-VirtualBox systemd-logind[626]: Watching system buttons on /dev/input/event2 (AT Translated Set 2 keyboard)
+Nov 13 17:18:30 usuario-VirtualBox gdm-autologin]: gkr-pam: no password is available for user
+Nov 13 17:18:30 usuario-VirtualBox gdm-autologin]: pam_unix(gdm-autologin:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:18:30 usuario-VirtualBox systemd-logind[626]: New session 1 of user usuario.
+Nov 13 17:18:30 usuario-VirtualBox systemd: pam_unix(systemd-user:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:18:30 usuario-VirtualBox gdm-autologin]: gkr-pam: gnome-keyring-daemon started properly
+Nov 13 17:18:30 usuario-VirtualBox gnome-keyring-daemon[1075]: The Secret Service was already initialized
+Nov 13 17:18:30 usuario-VirtualBox gnome-keyring-daemon[1075]: The SSH agent was already initialized
+Nov 13 17:18:30 usuario-VirtualBox gnome-keyring-daemon[1075]: The PKCS#11 component was already initialized
+Nov 13 17:18:31 usuario-VirtualBox polkitd(authority=local): Registered Authentication Agent for unix-session:1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale es_ES.UTF-8)
+Nov 13 17:18:34 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:18:34 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:18:38 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:18:38 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:18:40 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:18:40 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:18:55 usuario-VirtualBox dbus-daemon[582]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Nov 13 17:19:01 usuario-VirtualBox CRON[2955]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:19:01 usuario-VirtualBox CRON[2955]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:19:34 usuario-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:19:34 usuario-VirtualBox pkexec[3033]: usuario: Executing command [USER=root] [TTY=unknown] [CWD=/home/usuario] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Nov 13 17:20:01 usuario-VirtualBox CRON[3047]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:20:01 usuario-VirtualBox CRON[3047]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:21:01 usuario-VirtualBox CRON[3071]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:21:01 usuario-VirtualBox CRON[3071]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:22:01 usuario-VirtualBox CRON[3169]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:22:01 usuario-VirtualBox CRON[3169]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:23:01 usuario-VirtualBox CRON[3186]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:23:01 usuario-VirtualBox CRON[3186]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:23:55 usuario-VirtualBox sudo: pam_unix(sudo:auth): authentication failure; logname= uid=1000 euid=0 tty=/dev/pts/0 ruser=usuario rhost=  user=usuario
+Nov 13 17:24:01 usuario-VirtualBox sudo:  usuario : TTY=pts/0 ; PWD=/home/usuario ; USER=root ; COMMAND=/usr/sbin/reboot
+Nov 13 17:24:01 usuario-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:24:01 usuario-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+Nov 13 17:24:10 usuario-VirtualBox systemd-logind[630]: New seat seat0.
+Nov 13 17:24:10 usuario-VirtualBox systemd-logind[630]: Watching system buttons on /dev/input/event0 (Power Button)
+Nov 13 17:24:10 usuario-VirtualBox systemd-logind[630]: Watching system buttons on /dev/input/event1 (Sleep Button)
+Nov 13 17:24:10 usuario-VirtualBox systemd-logind[630]: Watching system buttons on /dev/input/event2 (AT Translated Set 2 keyboard)
+Nov 13 17:24:11 usuario-VirtualBox gdm-autologin]: gkr-pam: no password is available for user
+Nov 13 17:24:11 usuario-VirtualBox gdm-autologin]: pam_unix(gdm-autologin:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:24:11 usuario-VirtualBox systemd-logind[630]: New session 1 of user usuario.
+Nov 13 17:24:11 usuario-VirtualBox systemd: pam_unix(systemd-user:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:24:11 usuario-VirtualBox gdm-autologin]: gkr-pam: gnome-keyring-daemon started properly
+Nov 13 17:24:11 usuario-VirtualBox gnome-keyring-daemon[1097]: The Secret Service was already initialized
+Nov 13 17:24:11 usuario-VirtualBox gnome-keyring-daemon[1097]: The SSH agent was already initialized
+Nov 13 17:24:11 usuario-VirtualBox gnome-keyring-daemon[1097]: The PKCS#11 component was already initialized
+Nov 13 17:24:12 usuario-VirtualBox polkitd(authority=local): Registered Authentication Agent for unix-session:1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale es_ES.UTF-8)
+Nov 13 17:24:16 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:24:16 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:24:17 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:24:17 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:24:18 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:24:18 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:24:36 usuario-VirtualBox dbus-daemon[587]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Nov 13 17:25:01 usuario-VirtualBox CRON[2687]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:25:01 usuario-VirtualBox CRON[2687]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:25:15 usuario-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:25:15 usuario-VirtualBox pkexec[2761]: usuario: Executing command [USER=root] [TTY=unknown] [CWD=/home/usuario] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Nov 13 17:26:01 usuario-VirtualBox CRON[2852]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:26:01 usuario-VirtualBox CRON[2852]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:26:37 usuario-VirtualBox sudo:  usuario : TTY=pts/0 ; PWD=/home/usuario ; USER=root ; COMMAND=/usr/sbin/reboot
+Nov 13 17:26:37 usuario-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:26:37 usuario-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+Nov 13 17:26:46 usuario-VirtualBox systemd-logind[632]: New seat seat0.
+Nov 13 17:26:46 usuario-VirtualBox systemd-logind[632]: Watching system buttons on /dev/input/event0 (Power Button)
+Nov 13 17:26:46 usuario-VirtualBox systemd-logind[632]: Watching system buttons on /dev/input/event1 (Sleep Button)
+Nov 13 17:26:46 usuario-VirtualBox systemd-logind[632]: Watching system buttons on /dev/input/event2 (AT Translated Set 2 keyboard)
+Nov 13 17:26:48 usuario-VirtualBox gdm-autologin]: gkr-pam: no password is available for user
+Nov 13 17:26:48 usuario-VirtualBox gdm-autologin]: pam_unix(gdm-autologin:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:26:48 usuario-VirtualBox systemd-logind[632]: New session 1 of user usuario.
+Nov 13 17:26:48 usuario-VirtualBox systemd: pam_unix(systemd-user:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:26:48 usuario-VirtualBox gdm-autologin]: gkr-pam: gnome-keyring-daemon started properly
+Nov 13 17:26:48 usuario-VirtualBox gnome-keyring-daemon[1094]: The Secret Service was already initialized
+Nov 13 17:26:48 usuario-VirtualBox gnome-keyring-daemon[1094]: The SSH agent was already initialized
+Nov 13 17:26:48 usuario-VirtualBox gnome-keyring-daemon[1094]: The PKCS#11 component was already initialized
+Nov 13 17:26:49 usuario-VirtualBox polkitd(authority=local): Registered Authentication Agent for unix-session:1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale es_ES.UTF-8)
+Nov 13 17:26:52 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:26:52 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:26:54 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:26:54 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:26:55 usuario-VirtualBox PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Nov 13 17:26:55 usuario-VirtualBox PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Nov 13 17:27:01 usuario-VirtualBox CRON[2862]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:27:01 usuario-VirtualBox CRON[2862]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:27:13 usuario-VirtualBox dbus-daemon[584]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+Nov 13 17:27:52 usuario-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by (uid=1000)
+Nov 13 17:27:52 usuario-VirtualBox pkexec[2947]: usuario: Executing command [USER=root] [TTY=unknown] [CWD=/home/usuario] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Nov 13 17:28:01 usuario-VirtualBox CRON[2961]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:28:01 usuario-VirtualBox CRON[2961]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:29:01 usuario-VirtualBox CRON[3014]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:29:01 usuario-VirtualBox CRON[3014]: pam_unix(cron:session): session closed for user usuario
+Nov 13 17:30:01 usuario-VirtualBox CRON[3036]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 13 17:30:01 usuario-VirtualBox CRON[3037]: pam_unix(cron:session): session opened for user usuario(uid=1000) by (uid=0)
+Nov 13 17:30:01 usuario-VirtualBox CRON[3036]: pam_unix(cron:session): session closed for user root
+Nov 13 17:30:01 usuario-VirtualBox CRON[3037]: pam_unix(cron:session): session closed for user usuario
+
+```
