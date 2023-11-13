@@ -115,16 +115,16 @@ La opción -d es para que se ejecute en segundo plano.
 
 Una vez tenemos los contenedores iniciados haremos un attach shell al contenedor tal y como se muestra en la siguiente imagen:
 
-![ALT](/home/asir2/Documentos/SRI/Git/Examen/2.png)
+![ALT](2.png)
 
 Ahora comprobaremos que funciona correctamente mediante el comando dig, en primer lugar comprobamos *www.tiendadeelectronica.int*
-![ALT](/home/asir2/Documentos/SRI/Git/Examen/3.png)
+![ALT](3.png)
 
 Seguimos comprobando el registro *CNAME*
-![ALT](/home/asir2/Documentos/SRI/Git/Examen/4.png)
+![ALT](4.png)
 
 Por último comprobamos el registro *TXT*
-![ALT](/home/asir2/Documentos/SRI/Git/Examen/5.png)
+![ALT](5.png)
 
 Para finalizar vemos los logs haciendo clic derecho sobre el contenedor y seleccionando la opción "*View Logs*"
 
