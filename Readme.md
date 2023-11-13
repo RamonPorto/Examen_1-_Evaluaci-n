@@ -124,12 +124,11 @@ Seguimos comprobando el registro *CNAME*
 ![ALT](/home/asir2/Documentos/SRI/Git/Examen/4.png)
 
 Por último comprobamos el registro *TXT*
-
 ![ALT](/home/asir2/Documentos/SRI/Git/Examen/5.png)
 
 Para finalizar vemos los logs haciendo clic derecho sobre el contenedor y seleccionando la opción "*View Logs*"
 
-!(/home/asir2/Documentos/SRI/Git/Examen/6.png)
+![ALT](/home/asir2/Documentos/SRI/Git/Examen/6.png)
 
 Salida por consola de los logs:
 ```
